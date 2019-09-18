@@ -591,7 +591,7 @@ CCanvas.prototype.pullUp = function (targetBeanId) {
 
     var beanList = me.beanList;
 
-    for (var i in   beanList) {
+    for (var i in beanList) {
         tmpBeanArray.push(beanList[i]);
     }
 
@@ -1129,7 +1129,7 @@ CFrame.prototype.hideAllVisibleFrameComponents = function () {
     var me = this;
 
     var compMap = me.frameComponentMap;
-    for (var key in  compMap) {
+    for (var key in compMap) {
         if (compMap.hasOwnProperty(key)) {
             var comp = compMap[key].htmlElement;
             if (comp.style.display === 'none') {
@@ -1142,7 +1142,7 @@ CFrame.prototype.hideAllVisibleFrameComponents = function () {
 CFrame.prototype.showAllVisibleFrameComponents = function () {
     var me = this;
     var compMap = me.frameComponentMap;
-    for (var key in  compMap) {
+    for (var key in compMap) {
         if (compMap.hasOwnProperty(key)) {
             var comp = compMap[key].htmlElement;
             if (comp._alreadyNone) {
@@ -1159,7 +1159,7 @@ CFrame.prototype.hideFrameComponentChildMenus = function () {
     var me = this;
 
     var compMap = me.frameComponentMap;
-    for (var key in  compMap) {
+    for (var key in compMap) {
         if (compMap.hasOwnProperty(key)) {
             var comp = compMap[key];
             if (comp.childMenu) {
@@ -1434,7 +1434,7 @@ CFrame.prototype.getPosition = function () {
         x = parseInt(me.htmlElement.style.left, 10) + frameWidth;
         y = parseInt(me.htmlElement.style.top, 10) + frameHeight;
     }
-    return {x: x, y: y, anchor: anchor};
+    return { x: x, y: y, anchor: anchor };
 };
 
 CFrame.prototype.getLeft = function () {
@@ -1458,7 +1458,7 @@ CFrame.prototype.getHeight = function () {
 
 CFrame.prototype.getSize = function () {
     var me = this;
-    return {width: me.getWidth(), height: me.getHeight()};
+    return { width: me.getWidth(), height: me.getHeight() };
 };
 
 CFrame.prototype.setSize = function (width, height, force) {
@@ -2446,7 +2446,7 @@ CWindowManager.prototype.windowMouseMove = function (e) {
     //Loop processing of each CWindow held by CWindowManager
     var beanList = me.beanList;
 
-    for (var windowId in  beanList) {
+    for (var windowId in beanList) {
 
         var targetWindow = beanList[windowId];
 
@@ -2504,7 +2504,7 @@ CWindowManager.prototype.windowMouseUp = function (e) {
 
     var beanList = me.beanList;
 
-    for (var windowId in  beanList) {
+    for (var windowId in beanList) {
 
         var objWindow = beanList[windowId];
 
@@ -2720,7 +2720,7 @@ JSFrame.prototype.create = function (model) {
 
     if (appearanceName) {
         appearance = this.createPresetStyle(appearanceName,
-            {appearanceParam: appearanceParam});
+            { appearanceParam: appearanceParam });
     }
 
 
