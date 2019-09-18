@@ -19,6 +19,9 @@ module.exports = (env, argv) => {
         entry: {
             jsframe: './src/index.js',
         },
+        resolve: {
+            extensions: [ '.tsx', '.ts', '.js' ]
+        },
         output: {
             path: path.join(__dirname, "dist"),
             filename: argv.mode === 'production' ? `[name].min.js` : `[name].js`,
@@ -36,10 +39,20 @@ module.exports = (env, argv) => {
                 {
                     test: /\.css$/,
                     use: [
-                        {loader: "style-loader"},
-                        {loader: "css-loader"}
+                        { loader: "style-loader" },
+                        { loader: "css-loader" }
                     ]
                 },
+                {
+                    test: /\.tsx?$/,
+                    use: 'ts-loader',
+                    exclude: /node_modules/
+                },
+                {
+                    test: /\.js?$/,
+                    use: 'ts-loader',
+                    exclude: /node_modules/
+                }
             ],
         },
         plugins: [
