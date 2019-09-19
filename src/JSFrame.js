@@ -303,7 +303,7 @@ function CBeanFrame(beanId, left, top, width, height, zindex, w_border_width, ap
     me.htmlElement.style.borderColor = '#000000';
 
     //If I set a larger font size, width and height of window will be affected....
-    me.htmlElement.style.fontSize = '1px';
+    //me.htmlElement.style.fontSize = '1px';
 
     //Refer parents to each other.(sougo-sansho)
     me.htmlElement.parent = me;
