@@ -49,6 +49,11 @@ module.exports = (env, argv) => {
                     exclude: /node_modules/
                 },
                 {
+                    test: /\.ts?$/,
+                    use: 'ts-loader',
+                    exclude: /node_modules/
+                },
+                {
                     test: /\.js?$/,
                     use: 'ts-loader',
                     exclude: /node_modules/
