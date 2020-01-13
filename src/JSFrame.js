@@ -38,11 +38,7 @@ var CSimpleLayoutAnimator = require('./CSimpleLayoutAnimator.js');
 // var presetStyleMaterial = require('./PresetStyleMaterial.js');
 
 var presetStyles = {
-    'yosemite': require('./PresetStyleYosemite.js'),
     'redstone': require('./PresetStyleRedstone.js'),
-    'popup': require('./PresetStylePopup.js'),
-    'toast': require('./PresetStyleToast.js'),
-    'material': require('./PresetStyleMaterial.js'),
 };
 
 
@@ -86,9 +82,6 @@ function CFrameAppearance() {
     this.titleBarCaptionColorFocused = '';
     this.titleBarCaptionTextShadow = '0 1px 0 rgba(255,255,255,.7)';
     this.titleBarCaptionTextAlign = 'center';
-
-    this.titleBarBorderBottomDefault = '1px solid rgba(0,0,0,0.2)';
-    this.titleBarBorderBottomFocused = null;
 
     this.frameBorderRadius = '6px';
 
@@ -289,6 +282,7 @@ function CBeanFrame(beanId, left, top, width, height, zindex, w_border_width, ap
     //initialize
     me.htmlElement = document.createElement(DEF.CBEAN.HTML_ELEMENT);
     me.htmlElement.id = DEF.CBEAN.HTML_ELEMENT_ID_PREFIX + beanId;
+    me.htmlElement.className = DEF.CBEAN.HTML_ELEMENT_ID_PREFIX + 'window';
     me.htmlElement.style.position = 'absolute';
     me.htmlElement.style.left = parseInt(left, 10) + 'px';
     me.htmlElement.style.top = parseInt(top, 10) + 'px';
@@ -300,7 +294,6 @@ function CBeanFrame(beanId, left, top, width, height, zindex, w_border_width, ap
     if (zindex !== null) {
         me.htmlElement.style.zIndex = zindex;
     }
-    me.htmlElement.style.borderColor = '#000000';
 
     //If I set a larger font size, width and height of window will be affected....
     //me.htmlElement.style.fontSize = '1px';
@@ -756,8 +749,6 @@ function CFrame(windowId, w_left, w_top, w_width, w_height, zindex, w_border_wid
     me.titleBarCaptionLeftMargin = appearance.titleBarCaptionLeftMargin;
     me.titleBarCaptionFontSize = appearance.titleBarCaptionFontSize;
     me.titleBarCaptionFontWeight = appearance.titleBarCaptionFontWeight;
-    me.titleBarBorderBottomDefault = appearance.titleBarBorderBottomDefault;
-    me.titleBarBorderBottomFocused = appearance.titleBarBorderBottomFocused;
     me.titleBarCaptionTextShadow = appearance.titleBarCaptionTextShadow;
     me.titleBarCaptionTextAlign = appearance.titleBarCaptionTextAlign;
 
@@ -814,22 +805,13 @@ function CFrame(windowId, w_left, w_top, w_width, w_height, zindex, w_border_wid
             me.titleBar.style.height = (parseInt(me.titleBarHeight, 10) + 0) + 'px';
         }
 
-        me.titleBar.style.backgroundColor = me.titleBarColorDefault;
         me.titleBar.style.zIndex = 0;
 
-        me.titleBar.style.color = me.titleBarCaptionColorDefault;
         me.titleBar.style.fontSize = me.titleBarCaptionFontSize;
         me.titleBar.style.fontWeight = me.titleBarCaptionFontWeight;
         me.titleBar.style.textShadow = me.titleBarCaptionTextShadow;
         me.titleBar.style.textAlign = me.titleBarCaptionTextAlign;
-        // me.titleBar.style.textShadow = "0 1px 0 rgba(255,255,255,.7)";
-        // me.titleBar.style.textAlign = 'center';
-
         me.titleBar.style.lineHeight = me.titleBar.style.height;
-
-
-        me.titleBar.style.borderBottom = me.titleBarBorderBottomDefault;
-        //me.titleBar.style.boxShadow = '0 1px 0 rgba(255,255,255,0.5)';
 
 
         //Set not to display overflow character string
@@ -1045,8 +1027,6 @@ function CFrame(windowId, w_left, w_top, w_width, w_height, zindex, w_border_wid
     //TODO deprecation(because CIfFrame is extended this operation)
     if (parseInt(appearance.frameBorderWidthDefault, 10) > 0) {
         me.htmlElement.style.borderWidth = appearance.frameBorderWidthDefault;
-        me.htmlElement.style.borderColor = appearance.frameBorderColorDefault;
-
     }
     if (parseInt(appearance.frameBorderRadius, 10) > 0) {
         me.htmlElement.style.borderRadius = appearance.frameBorderRadius;
@@ -1813,14 +1793,6 @@ CIfFrame.prototype.handleReleasingFocus = function (e) {
     var me = this;
     me._hasFocus = false;
 
-    me.titleBar.style.backgroundColor = me.titleBarColorDefault;
-    me.titleBar.style.color = me.titleBarCaptionColorDefault;
-
-    //border color
-    if (me.frameBorderColorDefault) {
-        me.htmlElement.style.borderColor = me.frameBorderColorDefault;
-    }
-
     //border width
     if (me.frameBorderWidthDefault) {
         me.htmlElement.style.borderWidth = me.frameBorderWidthDefault;
@@ -1839,12 +1811,6 @@ CIfFrame.prototype.handleReleasingFocus = function (e) {
         var frameComponent = me.frameComponentMap[frameComponentId];
         frameComponent.handleReleasingFocus();
     }
-
-    //border bottom
-    if (me.titleBarBorderBottomDefault) {
-        me.titleBar.style.borderBottom = me.titleBarBorderBottomDefault;
-    }
-
 
     //update style class
     me.titleBar.className = me.titleBarClassNameDefault;
@@ -1865,24 +1831,10 @@ CIfFrame.prototype.handleTakingFocus = function (e) {
 
     }
 
-    me.titleBar.style.backgroundColor = me.titleBarColorFocused;
-    me.titleBar.style.color = me.titleBarCaptionColorFocused;
-
-
-    //border color
-    if (me.frameBorderColorFocused) {
-        me.htmlElement.style.borderColor = me.frameBorderColorFocused;
-    }
-
     //border width
     if (me.frameBorderWidthFocused) {
         me.htmlElement.style.borderWidth = me.frameBorderWidthFocused;
         me.adjustFrameBorderRadius();
-    }
-
-    //border bottom
-    if (me.titleBarBorderBottomFocused) {
-        me.titleBar.style.borderBottom = me.titleBarBorderBottomFocused;
     }
 
     //handling for child frameComponents
