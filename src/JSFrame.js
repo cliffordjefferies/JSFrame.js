@@ -3218,7 +3218,7 @@ CDomPartsBuilder.prototype.buildTextButton = function (btnAppearance) {
     divElement._isMouseDown = false;
 
     divElement.style.position = 'absolute';
-
+    divElement.className = 'jsFrameBtn';
     divElement.style.top = '0px';
     divElement.style.left = '0px';
     divElement.style.width = (width) + 'px';
@@ -3273,21 +3273,16 @@ CDomPartsBuilder.prototype.buildTextButton = function (btnAppearance) {
      */
     divElement._handleFocusDrawing = function (evtName) {
 
-
+        var className = 'jsFrameBtn';
         if (divElement._hasFrameFocus) {
             //When this element has focus
-
+            className += ' focus';
             if (divElement._isMouseDown) {
                 //border
+                className += ' mouseDown';
+
                 divElement.style.borderColor = borderColorPressed;
                 divElement.style.borderStyle = borderStylePressed;
-
-                //background
-                divElement.style.backgroundColor = backgroundColorPressed;
-
-                //caption
-                divElement.style.color = captionColorPressed;
-
 
                 if (btnImagePressed) {
                     divElement.innerHTML = '';
@@ -3299,12 +3294,6 @@ CDomPartsBuilder.prototype.buildTextButton = function (btnAppearance) {
                 divElement.style.borderColor = borderColorFocused;
                 divElement.style.borderStyle = borderStyleFocused;
 
-                //background
-                divElement.style.backgroundColor = backgroundColorFocused;
-
-                //caption
-                divElement.style.color = captionColorFocused;
-
                 if (btnImageFocused) {
                     divElement.innerHTML = '';
                     divElement.appendChild(btnImageFocused);
@@ -3314,15 +3303,10 @@ CDomPartsBuilder.prototype.buildTextButton = function (btnAppearance) {
         } else {
             //When this element doesn't have focus
             if (divElement._isMouseDown) {
+                className += ' mouseDown';
                 //border
                 divElement.style.borderColor = borderColorPressed;
                 divElement.style.borderStyle = borderStylePressed;
-
-                //background
-                divElement.style.backgroundColor = backgroundColorPressed;
-
-                //caption
-                divElement.style.color = captionColorPressed;
 
                 if (btnImagePressed) {
                     divElement.innerHTML = '';
@@ -3337,12 +3321,6 @@ CDomPartsBuilder.prototype.buildTextButton = function (btnAppearance) {
                 divElement.style.borderColor = borderColorDefault;
                 divElement.style.borderStyle = borderStyleDefault;
 
-                //background
-                divElement.style.backgroundColor = backgroundColorDefault;
-
-                //caption
-                divElement.style.color = _captionColorDefault;
-
                 if (btnImageDefault) {
                     divElement.innerHTML = '';
                     divElement.appendChild(btnImageDefault);
@@ -3350,10 +3328,14 @@ CDomPartsBuilder.prototype.buildTextButton = function (btnAppearance) {
                 }
             }
         }
+        divElement.className = className;
     };
 
     divElement._handleHoverDrawing = function () {
 
+        if (divElement.className.indexOf('hover') < 0) {
+            divElement.className += ' hover';
+        }
         if (divElement._hasFrameFocus) {
             //When this element has focus
         } else {
@@ -3367,15 +3349,6 @@ CDomPartsBuilder.prototype.buildTextButton = function (btnAppearance) {
             divElement.style.borderStyle = borderStyleHovered;
         }
 
-        //background
-        if (backgroundColorHovered) {
-            divElement.style.backgroundColor = backgroundColorHovered;
-        }
-
-        if (captionColorHovered) {
-            //caption
-            divElement.style.color = captionColorHovered;
-        }
         if (btnImageHovered) {
             divElement.innerHTML = '';
             divElement.appendChild(btnImageHovered);
