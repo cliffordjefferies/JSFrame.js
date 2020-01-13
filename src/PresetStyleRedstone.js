@@ -41,9 +41,6 @@ function getStyle(fApr) {
     fApr.titleBarColorDefault = 'white';
     fApr.titleBarColorFocused = 'white';
 
-    fApr.titleBarBorderBottomDefault = 'solid 1px #aaaaaa';
-    fApr.titleBarBorderBottomFocused = 'solid 1px #1883d7';
-
     fApr.frameBorderRadius = '0px';
 
     //border width
