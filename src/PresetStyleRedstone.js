@@ -30,8 +30,6 @@ function getStyle(fApr) {
     fApr.showTitleBar = true;
     fApr.showCloseButton = true;
 
-    fApr.titleBarCaptionFontSize = '12px';
-    fApr.titleBarCaptionFontWeight = 'normal';
     fApr.titleBarCaptionLeftMargin = '10px';
     fApr.titleBarCaptionColorDefault = '#9b9a9b';
     fApr.titleBarCaptionColorFocused = '#4d494d';

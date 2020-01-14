@@ -57,8 +57,6 @@ function CFrameAppearance() {
     this.showTitleBar = true;
     this.showCloseButton = true;
     this.titleBarCaption = '';
-    this.titleBarCaptionFontSize = '12px';
-    this.titleBarCaptionFontWeight = 'bold';
     this.titleBarHeight = '24px';
 
     this.useIframe = false;
@@ -294,9 +292,6 @@ function CBeanFrame(beanId, left, top, width, height, zindex, w_border_width, ap
     if (zindex !== null) {
         me.htmlElement.style.zIndex = zindex;
     }
-
-    //If I set a larger font size, width and height of window will be affected....
-    //me.htmlElement.style.fontSize = '1px';
 
     //Refer parents to each other.(sougo-sansho)
     me.htmlElement.parent = me;
@@ -747,8 +742,6 @@ function CFrame(windowId, w_left, w_top, w_width, w_height, zindex, w_border_wid
 
     me.titleBarCaption = appearance.titleBarCaption;
     me.titleBarCaptionLeftMargin = appearance.titleBarCaptionLeftMargin;
-    me.titleBarCaptionFontSize = appearance.titleBarCaptionFontSize;
-    me.titleBarCaptionFontWeight = appearance.titleBarCaptionFontWeight;
     me.titleBarCaptionTextShadow = appearance.titleBarCaptionTextShadow;
     me.titleBarCaptionTextAlign = appearance.titleBarCaptionTextAlign;
 
@@ -807,8 +800,6 @@ function CFrame(windowId, w_left, w_top, w_width, w_height, zindex, w_border_wid
 
         me.titleBar.style.zIndex = 0;
 
-        me.titleBar.style.fontSize = me.titleBarCaptionFontSize;
-        me.titleBar.style.fontWeight = me.titleBarCaptionFontWeight;
         me.titleBar.style.textShadow = me.titleBarCaptionTextShadow;
         me.titleBar.style.textAlign = me.titleBarCaptionTextAlign;
         me.titleBar.style.lineHeight = me.titleBar.style.height;
@@ -2924,7 +2915,7 @@ JSFrame.prototype.showToast = function (model) {
         resizable: false,
         appearance: apr,
         style: style,
-        html: '<div id="my_element" style="box-sizing:border-box;display: flex;justify-content: center;align-items: center;padding:10px;font-size:16px;color:darkgray;height:' + (toastHeight) + 'px">' +
+        html: '<div id="my_element" style="box-sizing:border-box;display: flex;justify-content: center;align-items: center;padding:10px;color:darkgray;height:' + (toastHeight) + 'px">' +
             myHtml +
             '</div>'
     });
@@ -3228,8 +3219,7 @@ CDomPartsBuilder.prototype.buildTextButton = function (btnAppearance) {
     divElement.style.padding = '0px';
     //added for preventing bootstrap.css pollution
     divElement.style.boxSizing = 'content-box';
-    divElement.style.fontFamily = 'sans-serif';
-
+   
     divElement.onmousedown = function (e) {
         divElement._isMouseDown = true;
         divElement._handleFocusDrawing('onmousedown');
@@ -3388,7 +3378,6 @@ CDomPartsBuilder.prototype.buildTextButton = function (btnAppearance) {
         span.style.marginTop = captionShiftYpx + 'px';
         span.style.display = 'inline-block';
         span.style.textAlign = 'center';
-        span.style.fontFamily = 'sans-serif';
         span.appendChild(document.createTextNode(caption));
         divElement.appendChild(span);
 
@@ -3399,7 +3388,6 @@ CDomPartsBuilder.prototype.buildTextButton = function (btnAppearance) {
         span.style.marginTop = captionShiftYpx + 'px';
         span.style.display = 'inline-block';
         span.style.textAlign = 'center';
-        span.style.fontFamily = 'sans-serif';
         span.innerHTML = '<i class="' + fa + '"></i>';
         divElement.appendChild(span);
     } else if (!childMode && caption) {
