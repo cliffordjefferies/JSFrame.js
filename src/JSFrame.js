@@ -548,7 +548,17 @@ CCanvas.prototype.mouseMove = function (e) {
             deltaX = (parseInt(newObjLeftPx, 10) - parseInt(oldObjLeftPx, 10));
             deltaY = (parseInt(newObjTopPx, 10) - parseInt(oldObjTopPx, 10));
             me.currentObject.style.left = (parseInt(me.currentObject.style.left) + deltaX * me.currentObject.argX) + 'px';
-            me.currentObject.style.top = (parseInt(me.currentObject.style.top) + deltaY * me.currentObject.argY) + 'px';
+
+            // Stop user from taking window off screen
+            var top = (parseInt(me.currentObject.style.top) + deltaY * me.currentObject.argY);
+            var bottom = window.innerHeight - 25;
+            if (top < 0) {
+                top = 0;
+            } else if (top > bottom) {
+                top = bottom;
+            }
+
+            me.currentObject.style.top = top + 'px';
         }
 
         me.eventData.deltaX = deltaX;
@@ -1319,6 +1329,7 @@ CFrame.prototype._setPositionInternally = function (x, y, anchor, frameWidth, fr
     if (anchor) {
         me.anchor = anchor;
     }
+    if (y < 0) y = 0;
 
     if (!anchor || CALIGN.LEFT_TOP == anchor) {
         me.htmlElement.style.left = x + 'px';
@@ -2220,7 +2231,7 @@ CIfFrame.prototype.setUrl = function (url) {
             me.iframe.contentWindow.document.onmousemove = function (e) {
                 var frameLeft = me.getLeft();
                 var frameTop = me.getTop();
-
+                console.log('move')
                 var eventFromIframe = document.createEvent('MouseEvents');
                 eventFromIframe.initMouseEvent('mousemove', true, false, window, e.detail, e.screenX, e.screenY, (e.pageX + frameLeft), (e.pageY + frameTop),
                     e.ctrlKey, e.altKey, e.shiftKey, e.metaKey, e.button, null);
@@ -2620,6 +2631,7 @@ export default function JSFrame(model) {
     }
 
     function mouseMove(e) {
+        console.log('Move')
         me.windowManager.windowMouseMove(e);
         var globalMouseX = e.pageX;
         var globalMouseY = e.pageY;
