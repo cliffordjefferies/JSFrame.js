@@ -78,7 +78,6 @@ function CFrameAppearance() {
     this.titleBarColorFocused = '#d3e1ee';
     this.titleBarCaptionColorDefault = '';
     this.titleBarCaptionColorFocused = '';
-    this.titleBarCaptionTextShadow = '0 1px 0 rgba(255,255,255,.7)';
     this.titleBarCaptionTextAlign = 'center';
 
     this.frameBorderRadius = '6px';
@@ -752,7 +751,6 @@ function CFrame(windowId, w_left, w_top, w_width, w_height, zindex, w_border_wid
 
     me.titleBarCaption = appearance.titleBarCaption;
     me.titleBarCaptionLeftMargin = appearance.titleBarCaptionLeftMargin;
-    me.titleBarCaptionTextShadow = appearance.titleBarCaptionTextShadow;
     me.titleBarCaptionTextAlign = appearance.titleBarCaptionTextAlign;
 
     //Title bar width adjustment value
@@ -810,7 +808,6 @@ function CFrame(windowId, w_left, w_top, w_width, w_height, zindex, w_border_wid
 
         me.titleBar.style.zIndex = 0;
 
-        me.titleBar.style.textShadow = me.titleBarCaptionTextShadow;
         me.titleBar.style.textAlign = me.titleBarCaptionTextAlign;
         me.titleBar.style.lineHeight = me.titleBar.style.height;
 
