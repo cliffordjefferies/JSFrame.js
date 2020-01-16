@@ -2098,6 +2098,9 @@ CIfFrame.prototype.resize = function (deltaLeft, deltaTop, deltaWidth, deltaHeig
                 tmpBean.htmlElement.style.left = (parseInt(tmpBean.htmlElement.style.left) + deltaWidth) + 'px';
                 tmpBean.htmlElement.style.height = (parseInt(tmpBean.htmlElement.style.height) + deltaHeight) + 'px';
             }
+            if (typeof refCIfFrame.onResized === 'function') {
+                refCIfFrame.onResized(refCIfFrame);
+            }
         }
     }
 };//resize
@@ -2228,7 +2231,6 @@ CIfFrame.prototype.setUrl = function (url) {
             me.iframe.contentWindow.document.onmousemove = function (e) {
                 var frameLeft = me.getLeft();
                 var frameTop = me.getTop();
-                console.log('move')
                 var eventFromIframe = document.createEvent('MouseEvents');
                 eventFromIframe.initMouseEvent('mousemove', true, false, window, e.detail, e.screenX, e.screenY, (e.pageX + frameLeft), (e.pageY + frameTop),
                     e.ctrlKey, e.altKey, e.shiftKey, e.metaKey, e.button, null);
@@ -2613,10 +2615,8 @@ export default function JSFrame(model) {
         parentElement = document.body;
     }
 
-
     document.onmouseup = mouseUp;
     document.onmousemove = mouseMove;
-
 
     me.windowManager = new CWindowManager(parentElement, 'windowManager_' + me.generateUUID(), 0, 0, 0, 0);
     //me.windowManager = new CWindowManager(document.body, 'windowManager_' + me.generateUUID(), 0, 0, 0, 0);
@@ -2628,12 +2628,10 @@ export default function JSFrame(model) {
     }
 
     function mouseMove(e) {
-        console.log('Move')
         me.windowManager.windowMouseMove(e);
         var globalMouseX = e.pageX;
         var globalMouseY = e.pageY;
     }
-
 
 }
 
